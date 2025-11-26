@@ -10,6 +10,12 @@ const index = (req, res) => {
 const show = (req, res) => {
     const id = Number(req.params.id)
     const foundPost = posts.find((post) => post.id === id)      // cerca il post corrispondente dall'array in base all'id
+
+    if (!foundPost)                                             // se il post non viene trovato (id non compreso nell'array)
+        return res.status(404).json({                           // 404 -> risponde con "non trovato"
+            error: true,
+            message: "post not found"                           // restituisce "post non trovato"
+        })
     //console.log(foundPost)
     res.json(foundPost)                                         // restituisce il post trovato in formato Json
 }
@@ -33,6 +39,12 @@ const modify = (req, res) => {
 const destroy = (req, res) => {
     const id = Number(req.params.id)
     const foundPost = posts.find((post) => post.id === id)      // cerca il post corrispondente dall'array in base all'id
+
+    if (!foundPost)
+        return res.status(404).json({
+            error: true,
+            message: "psot not found"
+        })
 
     posts.splice(posts.indexOf(foundPost), 1)                   // rimuove il post che corrisponde all'id dall'array
     console.log(posts)                                          // stampa nel terminale la lista di post aggiornata (tranne quello eliminato)
