@@ -2,7 +2,7 @@ const posts = require("../data/lista_posts")                    // importo l'arr
 
 // index -> get 
 const index = (req, res) => {
-    res.send("Show all posts")
+    res.json(posts)                                             // restituisce tutti i post in formato Json
 }
 
 // show -> get
