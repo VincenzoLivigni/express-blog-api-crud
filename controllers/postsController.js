@@ -2,12 +2,18 @@ const posts = require("../data/lista_posts")                    // importo l'arr
 
 // index -> get 
 const index = (req, res) => {
+    // console.log(posts)
     res.json(posts)                                             // restituisce tutti i post in formato Json
 }
 
 // show -> get
 const show = (req, res) => {
-    res.send(`Show the post with id: ${req.params.id}`)
+    const id = Number(req.params.id)
+    const foundPost = posts.find((post) => post.id === id)      // cerca il post corrispondente dall'array in base all'id
+    //console.log(foundPost)
+    res.json(foundPost)                                         // restituisce il post trovato in formato Json
+
+
 }
 
 // store -> post
