@@ -2,8 +2,14 @@ const posts = require("../data/lista_posts")                    // importo l'arr
 
 // index -> get 
 const index = (req, res) => {
+    const tag = req.query.tag                                   // prende il parametro ?tag= --- (query al posto di params)
+    let filteredList = posts
+
+    if (tag) {
+        filteredList = posts.filter((post) => post.tags.includes(tag))   // restituisce i post filtrati che contengono il tag inseito
+    }
     // console.log(posts)
-    res.json(posts)                                             // restituisce tutti i post in formato Json
+    res.json(filteredList)                                      // restituisce tutti i post in formato Json - restituisce i post filtrati
 }
 
 // show -> get
