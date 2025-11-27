@@ -22,14 +22,24 @@ const show = (req, res) => {
             error: true,
             message: "post not found"                           // restituisce "post non trovato"
         })
-    //console.log(foundPost)
+    console.log(foundPost)
     res.json(foundPost)                                         // restituisce il post trovato in formato Json
 }
 
 // store -> post
 const store = (req, res) => {
-    res.send("Store a new post")
+    const newPost = {
+        id: Date.now(),                                         // l'id viene creato con Date.now()
+        ...req.body                                             // dati inviati dal client (contenuto del nuovo post)
+    }
+
+    console.log(newPost);
+    posts.push(newPost)                                         // aggiunge il nuovo post all'array "posts"
+
+
+    res.status(201).json(newPost)                               // restituisce "created" -> indica che il nuovo post stato creato correttamente in formato Json
 }
+
 
 // update -> put
 const update = (req, res) => {

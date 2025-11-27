@@ -6,6 +6,8 @@ const postsRouter = require("./routes/posts")                   // importo route
 
 app.use(express.static("public"))
 
+app.use(express.json())                                         // body-parser -> permette all'app di leggere le request-body in formato JSON
+
 app.get("/", (req, res) => {
     res.send("Welcome to my blog")
 })
@@ -13,6 +15,5 @@ app.get("/", (req, res) => {
 app.use("/posts", postsRouter)                                  // tutte le richieste a "/posts/.." verranno gestite da "postsRouter"
 
 app.listen(port, () => {
-    console.log(`Example app ${port}`);
-
+    console.log(`Example app ${port}`)
 })
