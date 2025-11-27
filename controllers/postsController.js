@@ -48,6 +48,12 @@ const update = (req, res) => {
 
     const post = posts.find((post) => post.id === postId)      // cerca il post corrispondente dall'array in base all'id
 
+    if (!post)
+        return res.status(404).json({
+            error: true,
+            message: "post not found"
+        })
+
     post.title = postData.title                                // modifica di tutti i parametri del post
     post.content = postData.content
     post.image = postData.image
