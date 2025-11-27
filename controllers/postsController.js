@@ -43,7 +43,19 @@ const store = (req, res) => {
 
 // update -> put
 const update = (req, res) => {
-    res.send(`Update the post with id: ${req.params.id}`)
+    const postId = Number(req.params.id)
+    const postData = req.body                                  // dati inviati dal client (i paramtri aggiornati del post)
+
+    const post = posts.find((post) => post.id === postId)      // cerca il post corrispondente dall'array in base all'id
+
+    post.title = postData.title                                // modifica di tutti i parametri del post
+    post.content = postData.content
+    post.image = postData.image
+    post.tags = postData.tags
+
+    console.log(postId, postData, post);
+
+    res.json(post)                                             // restituisce il post aggiornato in formato Json
 }
 
 // modify -> patch
