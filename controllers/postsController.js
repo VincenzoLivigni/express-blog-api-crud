@@ -28,9 +28,14 @@ const show = (req, res) => {
 
 // store -> post
 const store = (req, res) => {
-    const newPost = {
-        id: Date.now(),                                         // l'id viene creato con Date.now()
-        ...req.body                                             // dati inviati dal client (contenuto del nuovo post)
+    const data = req.body
+
+    const newPost = {                                           // dati inviati dal client (contenuto del nuovo post)
+        id: Date.now(),                                         // l'id viene creato con Date.now()-- (se non vengono passati i dati a tutti i parametri, il parametro vuoto -> undefined)
+        title: data.title,
+        content: data.content,
+        image: data.image,
+        tags: data.tags
     }
 
     console.log(newPost);
