@@ -9,6 +9,7 @@ app.use(express.static("public"))
 app.use(express.json())                                         // body-parser -> permette all'app di leggere le request-body in formato JSON
 
 app.get("/", (req, res) => {
+    // app.plicazione()                                         // errore forzato (per test "error 500")
     res.send("Welcome to my blog")
 })
 
@@ -18,6 +19,13 @@ app.use((req, res) => {                                         // Middleware pe
     res.status(404).json({                                      // oggetto Json con le informazioni sull'errore
         error: "404",
         message: "Endpoint not found"
+    })
+})
+
+app.use((err, req, res, next) => {                              // Middleware per la gestione degli errori (500) -- errore lato server
+    res.status(500).json({                                      // oggetto Json con le informazioni sull'errore
+        error: "Internal Server Error",
+        message: err.message
     })
 })
 
