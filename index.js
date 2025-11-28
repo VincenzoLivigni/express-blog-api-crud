@@ -14,6 +14,13 @@ app.get("/", (req, res) => {
 
 app.use("/posts", postsRouter)                                  // tutte le richieste a "/posts/.." verranno gestite da "postsRouter"
 
+app.use((req, res) => {                                         // Middleware per la gestione delle rotte non registrate (404) -- si esegue solo se nessuna delle rotte inserite sopra è stata chiamata
+    res.status(404).json({                                      // oggetto Json con le informazioni sull'errore
+        error: "404",
+        message: "Endpoint not found"
+    })
+})
+
 app.listen(port, () => {
     console.log(`Example app ${port}`)
 })
